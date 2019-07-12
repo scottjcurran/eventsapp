@@ -33,6 +33,7 @@ gem 'awesome_print', '~> 1.8'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'jquery-rails'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
+gem 'simple_form', '~> 4.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
