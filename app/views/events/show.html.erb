@@ -1,0 +1,19 @@
+<%= provide(:title, @event.title) %>
+
+<h1> <%= @event.title %> </h1>
+
+<div>
+  <p><%= @event.description %> </p>
+
+  <p><%= time_format(@event.start_date) %> </p>
+
+  <p> <%= time_format(@event.end_date) %></p>
+
+  <p> <%= @event.venue %> </p>
+
+  <p> <%= @event.location %> </p>
+</div>
+
+<%= link_to "Edit Event", edit_event_path(@event) %>
+
+<%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you Sure?"} %>
