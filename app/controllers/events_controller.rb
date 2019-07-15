@@ -1,12 +1,15 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!,except: [:index, :show]
+  before_action :authorize_owner!, only: [:edit, :update, :destroy]
   def new
     @event = Event.new
   end
 
   def create
     @event = Event.new(event_params)
+    @event.organizer = current_user
+
     if @event.save
       flash[:notice] = "Event created!"
       redirect_to @event
@@ -50,4 +53,13 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.find(params[:id])
   end
-end
+
+  def authorize_owner!
+    authenticate_user!
+
+    unless @event.organizer == current_user
+      flash[:alert] = "You do not have permission to '#{action_name}' the '#{@event.title.upcase}' event.  You can only update events you created"
+        redirect_to events_path
+    end
+  end
+  end
